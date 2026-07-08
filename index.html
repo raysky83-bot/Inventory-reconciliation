@@ -15,79 +15,107 @@
   *{box-sizing:border-box; margin:0}
   body{font-family:Pretendard,'Malgun Gothic','Apple SD Gothic Neo',sans-serif;
        background:var(--paper); color:var(--ink); font-size:15px; line-height:1.55}
-  .wrap{max-width:960px; margin:0 auto; padding:28px 20px 80px}
+  .wrap{max-width:1080px; margin:0 auto; padding:24px 20px 80px}
   header{display:flex; justify-content:space-between; align-items:baseline;
-         border-bottom:3px solid var(--ink); padding-bottom:14px; margin-bottom:26px}
-  h1{font-size:22px; letter-spacing:-.3px}
+         border-bottom:3px solid var(--ink); padding-bottom:12px; margin-bottom:18px}
+  h1{font-size:21px; letter-spacing:-.3px}
   h1 small{font-size:13px; color:var(--ink-2); font-weight:400; margin-left:10px}
-  #today{font-family:var(--mono); font-size:13px; color:var(--ink-2)}
+  #userBox{font-size:13px; color:var(--ink-2)}
+  #userBox input{font:inherit; border:1px solid var(--line); border-radius:5px; padding:4px 8px; width:110px}
 
-  /* 스텝 레일 */
-  .steps{display:flex; gap:8px; margin-bottom:22px}
-  .step{flex:1; background:var(--card); border:1px solid var(--line); border-radius:6px;
-        padding:9px 14px; font-size:13px; color:var(--ink-2); display:flex; gap:8px; align-items:center}
-  .step b{display:inline-flex; width:20px; height:20px; border-radius:50%;
-          border:1.5px solid var(--ink-2); align-items:center; justify-content:center;
-          font-size:11px; flex:none}
-  .step.on{border-color:var(--ink); color:var(--ink); font-weight:600}
-  .step.on b{background:var(--ink); border-color:var(--ink); color:#fff}
-  .step.done{border-color:var(--green); color:var(--green)}
-  .step.done b{background:var(--green); border-color:var(--green); color:#fff}
-
-  /* 파일 영역 */
+  /* 파일 화면 */
   #drop{border:2px dashed var(--line); border-radius:10px; background:var(--card);
-        padding:26px; text-align:center; transition:border-color .15s, background .15s; cursor:pointer}
+        padding:26px; text-align:center; cursor:pointer}
   #drop.over{border-color:var(--ink); background:#EEF2F5}
   #drop p{color:var(--ink-2); font-size:14px}
   #drop p strong{color:var(--ink)}
   .slots{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px}
   .slot{background:var(--card); border:1px solid var(--line); border-left:4px solid var(--line);
         border-radius:6px; padding:12px 14px; text-align:left}
-  .slot .tag{font-size:12px; color:var(--ink-2); letter-spacing:.4px}
+  .slot .tag{font-size:12px; color:var(--ink-2)}
   .slot .fname{font-size:13.5px; margin-top:3px; word-break:break-all; color:#98a3ac}
   .slot.ok{border-left-color:var(--green)}
   .slot.ok .fname{color:var(--ink); font-weight:600}
-
-  .runrow{display:flex; gap:12px; margin-top:18px; align-items:center}
+  .runrow{display:flex; gap:12px; margin-top:16px; align-items:center; flex-wrap:wrap}
   button{font:inherit; cursor:pointer; border-radius:6px; border:1px solid var(--ink);
-         padding:11px 26px; font-weight:700; letter-spacing:.2px}
-  #runBtn{background:var(--ink); color:#fff; font-size:15px}
-  #runBtn:disabled{background:#B9C2CA; border-color:#B9C2CA; cursor:not-allowed}
-  #dlBtn{background:var(--green); border-color:var(--green); color:#fff; font-size:15px}
-  #resetBtn{background:transparent; color:var(--ink-2); border-color:var(--line); font-weight:400; padding:11px 16px}
+         padding:10px 22px; font-weight:700}
   button:focus-visible{outline:3px solid var(--amber); outline-offset:2px}
+  .btn-pri{background:var(--ink); color:#fff}
+  .btn-pri:disabled{background:#B9C2CA; border-color:#B9C2CA; cursor:not-allowed}
+  .btn-green{background:var(--green); border-color:var(--green); color:#fff}
+  .btn-ghost{background:transparent; color:var(--ink-2); border-color:var(--line); font-weight:400}
+  .btn-sm{padding:4px 10px; font-size:12.5px; font-weight:600; border-radius:5px}
+  .btn-cand{background:#fff; color:var(--ink); border-color:var(--ink-2)}
+  .btn-cand:hover{background:var(--green-bg); border-color:var(--green)}
+  .btn-x{background:#fff; color:var(--red); border-color:var(--red)}
   #msg{font-size:13.5px; color:var(--red); margin-top:10px; white-space:pre-wrap}
+  #saveNote{font-size:12.5px; color:var(--green); margin-top:8px}
 
-  /* 결과 */
-  #result{display:none; margin-top:30px}
-  .stamp{display:flex; align-items:center; gap:14px; padding:14px 18px; border-radius:8px;
-         border:1.5px solid var(--green); background:var(--green-bg); margin-bottom:18px}
+  /* 검증 스탬프 */
+  .stamp{display:flex; align-items:center; gap:14px; padding:12px 16px; border-radius:8px;
+         border:1.5px solid var(--green); background:var(--green-bg); margin:18px 0 14px}
   .stamp.bad{border-color:var(--red); background:var(--red-bg)}
-  .seal{width:52px; height:52px; border:2.5px solid var(--green); border-radius:50%; flex:none;
-        display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12px;
-        color:var(--green); transform:rotate(-8deg); letter-spacing:1px}
+  .seal{width:48px; height:48px; border:2.5px solid var(--green); border-radius:50%; flex:none;
+        display:flex; align-items:center; justify-content:center; font-weight:800; font-size:11.5px;
+        color:var(--green); transform:rotate(-8deg)}
   .stamp.bad .seal{border-color:var(--red); color:var(--red)}
-  .stamp .txt b{font-size:15px}
-  .stamp .txt div{font-size:13px; color:var(--ink-2); font-family:var(--mono)}
+  .stamp .txt b{font-size:14.5px}
+  .stamp .txt div{font-size:12.5px; color:var(--ink-2); font-family:var(--mono)}
 
-  .cards{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:22px}
-  .kcard{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:14px 16px}
-  .kcard .lb{font-size:12.5px; color:var(--ink-2)}
-  .kcard .v{font-family:var(--mono); font-size:22px; font-weight:700; margin-top:4px}
-  .kcard.warn .v{color:var(--amber)}
-  .kcard.bad .v{color:var(--red)}
+  /* 탭 */
+  #tabs{display:none}
+  .tabbar{display:flex; gap:4px; border-bottom:2px solid var(--ink); margin-bottom:14px}
+  .tabbar button{border:1px solid var(--line); border-bottom:none; background:#E9EDF0;
+                 color:var(--ink-2); border-radius:8px 8px 0 0; padding:9px 20px; font-size:14px}
+  .tabbar button.on{background:var(--ink); color:#fff; border-color:var(--ink)}
+  .tabbar .badge{display:inline-block; background:var(--red); color:#fff; font-size:11px;
+                 border-radius:9px; padding:1px 7px; margin-left:6px; font-weight:700}
+  .pane{display:none} .pane.on{display:block}
 
-  h2{font-size:15px; margin:24px 0 10px; padding-left:10px; border-left:4px solid var(--ink)}
-  table{width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line);
-        font-size:13.5px}
-  th{background:var(--ink); color:#fff; padding:8px 10px; text-align:left; font-weight:600}
-  td{padding:7px 10px; border-top:1px solid var(--line)}
-  td.n{font-family:var(--mono); text-align:right}
-  td.neg{color:var(--red)} td.pos{color:var(--green)}
-  tr.total td{font-weight:700; background:#EEF2F5}
+  /* 필터바 */
+  .filters{display:flex; gap:10px; flex-wrap:wrap; align-items:center; background:var(--card);
+           border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin-bottom:10px}
+  .filters label{font-size:12.5px; color:var(--ink-2); display:flex; flex-direction:column; gap:3px}
+  .filters select,.filters input[type=text]{font:inherit; font-size:13.5px; border:1px solid var(--line);
+           border-radius:5px; padding:6px 8px; min-width:130px; background:#fff}
+  .filters .chk{flex-direction:row; align-items:center; gap:6px; font-size:13.5px; color:var(--ink); margin-top:14px}
+  #fsum{font-family:var(--mono); font-size:13px; color:var(--ink-2); margin-left:auto; text-align:right}
+
+  .cards{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:14px}
+  .kcard{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:11px 14px}
+  .kcard .lb{font-size:12px; color:var(--ink-2)}
+  .kcard .v{font-family:var(--mono); font-size:20px; font-weight:700; margin-top:2px}
+  .kcard.warn .v{color:var(--amber)} .kcard.bad .v{color:var(--red)}
+
+  table{width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); font-size:13px}
+  th{background:var(--ink); color:#fff; padding:7px 9px; text-align:left; font-weight:600; cursor:pointer;
+     user-select:none; white-space:nowrap}
+  th .arr{font-size:10px; opacity:.85}
+  td{padding:6px 9px; border-top:1px solid var(--line); vertical-align:top}
+  td.n{font-family:var(--mono); text-align:right; white-space:nowrap}
+  td.neg{color:var(--red); font-weight:700} td.pos{color:var(--green); font-weight:700}
+  td.code{font-family:var(--mono); font-size:12px; white-space:nowrap}
+  tr.manual td{background:#F3F7FB}
+  .tbwrap{max-height:560px; overflow:auto; border:1px solid var(--line)}
+  .tbwrap table{border:none}
+  .tbwrap th{position:sticky; top:0}
+
+  h2{font-size:15px; margin:20px 0 8px; padding-left:10px; border-left:4px solid var(--ink)}
   .note{font-size:12.5px; color:var(--ink-2); margin-top:6px}
+  .fixcard{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:12px 14px; margin-bottom:10px}
+  .fixcard .head{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
+  .fixcard .ttl{font-weight:700; font-size:13.5px}
+  .fixcard .ttl span{font-family:var(--mono); font-weight:400; color:var(--ink-2); font-size:12px}
+  .cands{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; align-items:center}
+  .searchrow{display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; align-items:center}
+  .searchrow input{font:inherit; font-size:13px; border:1px solid var(--line); border-radius:5px; padding:6px 8px; width:280px}
+  .srch-res{display:flex; gap:6px; flex-wrap:wrap; margin-top:6px}
+  .done-lb{color:var(--green); font-weight:700; font-size:13px}
+  select.dd{font:inherit; font-size:13px; border:1px solid var(--line); border-radius:5px; padding:5px 8px; background:#fff}
+  .logrow td{font-size:12.5px}
 
-  @media(max-width:680px){.cards{grid-template-columns:repeat(2,1fr)} .slots{grid-template-columns:1fr}}
+  @media(max-width:720px){.cards{grid-template-columns:repeat(2,1fr)} .slots{grid-template-columns:1fr}
+    .filters select,.filters input[type=text]{min-width:110px}}
   @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -95,399 +123,544 @@
 <div class="wrap">
   <header>
     <h1>재고 대사<small>WMS(3PL 군포) × 창고별 ERP(군포)</small></h1>
-    <span id="today"></span>
+    <div id="userBox">작업자 이름 <input type="text" id="userName" placeholder="예: 홍길동" maxlength="20"></div>
   </header>
 
-  <div class="steps">
-    <div class="step on" id="st1"><b>1</b>파일 넣기</div>
-    <div class="step" id="st2"><b>2</b>대사 실행</div>
-    <div class="step" id="st3"><b>3</b>결과 확인·다운로드</div>
-  </div>
-
-  <div id="drop" tabindex="0" role="button" aria-label="엑셀 파일 선택 또는 끌어다 놓기">
-    <p><strong>엑셀 파일 2개를 여기에 끌어다 놓거나, 클릭해서 선택하세요</strong><br>
-    파일명에 날짜가 붙어 있어도 자동으로 인식합니다 (예: 재고현황_WMS_26년 7월 8일.xls)</p>
-    <input type="file" id="fileInput" multiple accept=".xls,.xlsx" hidden>
-    <div class="slots">
-      <div class="slot" id="slotW"><div class="tag">WMS 재고 (재고현황_WMS…)</div><div class="fname">대기 중</div></div>
-      <div class="slot" id="slotH"><div class="tag">창고별 ERP (창고별재고현황_ERP…)</div><div class="fname">대기 중</div></div>
+  <div id="fileScreen">
+    <div id="drop" tabindex="0" role="button" aria-label="엑셀 파일 선택 또는 끌어다 놓기">
+      <p><strong>엑셀 파일 2개를 끌어다 놓거나, 클릭해서 선택하세요</strong><br>
+      파일명에 날짜가 붙어 있어도 자동 인식합니다. 보정파일(.json)을 함께 놓으면 같이 적용됩니다.</p>
+      <input type="file" id="fileInput" multiple accept=".xls,.xlsx,.json" hidden>
+      <div class="slots">
+        <div class="slot" id="slotW"><div class="tag">WMS 재고 (재고현황_WMS…)</div><div class="fname">대기 중</div></div>
+        <div class="slot" id="slotH"><div class="tag">창고별 ERP (창고별재고현황_ERP…)</div><div class="fname">대기 중</div></div>
+      </div>
     </div>
+    <div class="runrow">
+      <button id="runBtn" class="btn-pri" disabled>대사 실행</button>
+      <button id="resetBtn" class="btn-ghost">처음부터</button>
+    </div>
+    <div id="saveNote"></div>
+    <div id="msg" role="alert"></div>
   </div>
 
-  <div class="runrow">
-    <button id="runBtn" disabled>대사 실행</button>
-    <button id="resetBtn">처음부터</button>
-  </div>
-  <div id="msg" role="alert"></div>
-
-  <div id="result">
+  <div id="tabs">
     <div class="stamp" id="stamp">
       <div class="seal">검증<br>OK</div>
       <div class="txt"><b id="stampTitle"></b><div id="stampDetail"></div></div>
     </div>
-    <div class="cards" id="cards"></div>
-    <div style="display:flex; gap:12px; align-items:center">
-      <button id="dlBtn">결과 엑셀 다운로드</button>
-      <span class="note">시트 6개: 대사결과 · 재고조사리스트 · 매칭실패_WMS · 양측재고없음 · 담당자별요약 · 고객사별요약</span>
+    <div class="tabbar">
+      <button data-tab="p1" class="on">대사결과</button>
+      <button data-tab="p2">보정 작업 <span class="badge" id="fixBadge">0</span></button>
+      <button data-tab="p3">보정 내역</button>
     </div>
-    <h2>담당자별 요약</h2>
-    <table id="tblDamdang"></table>
-    <h2>매칭 방식 분포</h2>
-    <table id="tblHow"></table>
-    <h2>매칭 실패 (WMS 기준) — 유사도 추천 포함</h2>
-    <table id="tblDrop"></table>
-    <p class="note">매칭 실패 품목은 다운로드한 엑셀의 [매칭실패_WMS] 시트에서 전체를 확인할 수 있습니다.</p>
+
+    <!-- 탭1: 대사결과 -->
+    <div class="pane on" id="p1">
+      <div class="filters">
+        <label>담당자<select id="fDamdang"><option value="">전체</option></select></label>
+        <label>고객사<select id="fCust"><option value="">전체</option></select></label>
+        <label>검색(코드/품명)<input type="text" id="fText" placeholder="예: 동점퍼, 310"></label>
+        <label class="chk"><input type="checkbox" id="fDiff">차이 있는 것만</label>
+        <div id="fsum"></div>
+      </div>
+      <div class="cards" id="cards"></div>
+      <div class="tbwrap"><table id="tblMain"></table></div>
+      <div class="runrow" style="margin-top:14px">
+        <button id="dlBtn" class="btn-green">결과 엑셀 다운로드</button>
+        <span class="note">보정 내용이 반영된 6개 시트 + 보정내역 시트가 저장됩니다.</span>
+      </div>
+    </div>
+
+    <!-- 탭2: 보정 작업 -->
+    <div class="pane" id="p2">
+      <h2>① 매칭실패 보정 — 올바른 ERP 코드를 지정하세요</h2>
+      <p class="note">추천 버튼을 누르면 즉시 매핑됩니다. 대사에서 뺄 품목은 [대사제외]를 누르세요. 모든 보정은 이 PC에 자동 저장되어 다음 달에도 적용됩니다.</p>
+      <div id="fixDrop"></div>
+      <h2>② 담당자 지정 — 담당미지정 품목 또는 담당 변경</h2>
+      <div class="searchrow"><input type="text" id="ddSearch" placeholder="품목코드/품명 검색 후 담당 변경 (미지정 품목은 아래 기본 표시)"></div>
+      <div id="fixDamdang" style="margin-top:8px"></div>
+    </div>
+
+    <!-- 탭3: 보정 내역 -->
+    <div class="pane" id="p3">
+      <div class="runrow" style="margin-top:0">
+        <button id="expBtn" class="btn-ghost">보정 내보내기(.json)</button>
+        <button id="impBtn" class="btn-ghost">보정 가져오기</button>
+        <input type="file" id="impInput" accept=".json" hidden>
+        <button id="clrBtn" class="btn-ghost" style="color:var(--red)">보정 전체 삭제</button>
+      </div>
+      <p class="note" style="margin:8px 0 10px">내보낸 파일을 다른 담당자에게 전달하면 그쪽 PC에서 [보정 가져오기]로 합칠 수 있습니다.</p>
+      <div class="tbwrap"><table id="tblLog"></table></div>
+    </div>
   </div>
 </div>
 
 <script>
-/* ───────── 대사 핵심 로직 (파이썬 재고대사.py 이식, 결과 동일성 검증 완료) ───────── */
-const RECON = (function () {
-  const clean = c => String(c ?? '').replace(/\s+/g, '').trim().toUpperCase();
-  const stripVariant = code => {
-    const p = code.split('-');
-    return (p.length >= 6 && /^\d+$/.test(p[p.length - 1])) ? p.slice(0, -1).join('-') : code;
-  };
-  const seasonKey = code => {
-    const p = code.split('-');
-    const m = p[p.length - 1].match(/^([A-Z]+)(\d+|NO)$/);
-    return m ? p.slice(0, -1).join('-') + '-' + m[1] + '*' : code;
-  };
-  const yearOf = code => {
-    const m = code.split('-').pop().match(/(\d{2})$/);
-    return m ? parseInt(m[1], 10) : -1;
-  };
-  const normName = s => String(s ?? '').replace(/[\s()\[\]_/·,-]+/g, '').toUpperCase();
-  const bigrams = s => { const r = []; for (let i = 0; i < s.length - 1; i++) r.push(s.slice(i, i + 2)); return r; };
-  const sim = (a, b) => {
-    if (!a || !b) return 0;
-    if (a === b) return 1;
-    const A = bigrams(a), B = new Map();
-    bigrams(b).forEach(g => B.set(g, (B.get(g) || 0) + 1));
-    let hit = 0;
-    A.forEach(g => { if (B.get(g) > 0) { hit++; B.set(g, B.get(g) - 1); } });
-    return (2 * hit) / (a.length - 1 + b.length - 1);
-  };
-  const num = v => { const n = parseFloat(v); return isNaN(n) ? 0 : n; };
-
-  function parseWMS(rows) {
-    const hdr = (rows[1] || []).map(h => String(h ?? '').trim());
-    const iCode = hdr.indexOf('품번'), iName = hdr.indexOf('품명'),
-          iSize = hdr.indexOf('사이즈'), iQty = hdr.indexOf('재고수량');
-    if (iCode < 0 || iQty < 0) throw new Error('WMS 파일에서 [품번/재고수량] 열을 찾지 못했습니다. 올바른 재고현황_WMS 파일인지 확인해주세요.');
-    const out = [];
-    for (let r = 2; r < rows.length; r++) {
-      const row = rows[r]; if (!row) continue;
-      const code = clean(row[iCode]); if (!code) continue;
-      out.push({ code, name: String(row[iName] ?? ''), size: String(row[iSize] ?? ''), qty: num(row[iQty]) });
-    }
-    return out;
-  }
-
-  function parseWH(rows) {
-    const hdr = (rows[0] || []).map(h => String(h ?? '').trim());
-    const iCode = hdr.indexOf('품목'), iName = hdr.indexOf('품목명'),
-          iCust = hdr.indexOf('주거래처코드'), iCustN = hdr.indexOf('주거래처명');
-    const gunpo = hdr.map((h, i) => h.startsWith('군포_') ? i : -1).filter(i => i >= 0);
-    if (iCode < 0 || !gunpo.length) throw new Error('창고별 파일에서 [품목/군포_담당자] 열을 찾지 못했습니다. 올바른 창고별재고현황_ERP 파일인지 확인해주세요.');
-    const out = [];
-    for (let r = 1; r < rows.length; r++) {
-      const row = rows[r]; if (!row) continue;
-      const code = clean(row[iCode]); if (!code) continue;
-      out.push({ code, name: String(row[iName] ?? ''), custCd: clean(row[iCust]),
-                 custName: String(row[iCustN] ?? ''), per: gunpo.map(i => num(row[i])) });
-    }
-    return { rows: out, damdangNames: gunpo.map(i => hdr[i].replace('군포_', '')) };
-  }
-
-  function run(wmsRows2d, whRows2d) {
-    const wmsRaw = parseWMS(wmsRows2d);
-    const { rows: whRaw, damdangNames } = parseWH(whRows2d);
-
-    const whg = new Map(), custMap = new Map();
-    whRaw.forEach(r => {
-      const main = r.code.split('-').slice(0, -1).join('-');
-      if (!whg.has(main)) whg.set(main, { name: r.name, custCd: r.custCd, custName: r.custName,
-                                          per: new Array(damdangNames.length).fill(0), gunpo: 0 });
-      const g = whg.get(main);
-      r.per.forEach((v, i) => { g.per[i] += v; g.gunpo += v; });
-      if (r.custCd && !custMap.has(r.custCd)) custMap.set(r.custCd, r.custName);
-    });
-    whg.forEach(g => {
-      const names = damdangNames.filter((_, i) => g.per[i] !== 0);
-      g.damdang = names.length ? names.join('/') : '담당미지정';
-    });
-
-    const wg = new Map();
-    wmsRaw.forEach(r => {
-      if (!wg.has(r.code)) wg.set(r.code, { code: r.code, name: r.name, qty: 0,
-                                            custCd: r.code.split('-')[2] || '' });
-      wg.get(r.code).qty += r.qty;
-    });
-
-    const skeyGroups = new Map();
-    whg.forEach((_, m) => {
-      const k = seasonKey(m);
-      if (!skeyGroups.has(k)) skeyGroups.set(k, []);
-      skeyGroups.get(k).push(m);
-    });
-    const matched = [], dropout = [];
-    wg.forEach(item => {
-      const nv = stripVariant(item.code);
-      let main = null, how = '미매칭';
-      if (whg.has(item.code)) { main = item.code; how = '완전일치'; }
-      else if (nv !== item.code && whg.has(nv)) { main = nv; how = '분화코드통합(-N 제거)'; }
-      else {
-        const cands = skeyGroups.get(seasonKey(nv)) || [];
-        if (cands.length === 1) { main = cands[0]; how = '연식차이매칭'; }
-        else if (cands.length > 1) {
-          const wy = yearOf(nv);
-          main = [...cands].sort().reduce((b, c) =>
-            (Math.abs(yearOf(c) - wy) < Math.abs(yearOf(b) - wy) ||
-             (Math.abs(yearOf(c) - wy) === Math.abs(yearOf(b) - wy) && yearOf(c) > yearOf(b))) ? c : b);
-          how = `연식차이매칭(후보${cands.length}건 중 최근접 선택)`;
-        }
-      }
-      if (main) matched.push({ ...item, main, how });
-      else dropout.push(item);
-    });
-
-    const whArr = [...whg.entries()].map(([m, g]) => ({ main: m, ...g, nm: normName(g.name) }));
-    dropout.forEach(d => {
-      const tgt = normName(d.name);
-      d.suggest = whArr.filter(w => w.custCd === d.custCd)
-        .map(w => ({ m: w.main, s: sim(tgt, w.nm) }))
-        .sort((a, b) => b.s - a.s).slice(0, 2)
-        .filter(x => x.s >= 0.45)
-        .map(x => `${x.m}(${Math.round(x.s * 100)}%)`).join(' / ');
-      d.custName = custMap.get(d.custCd) || d.custCd;
-    });
-
-    const reconMap = new Map();
-    matched.forEach(m => {
-      if (!reconMap.has(m.main)) reconMap.set(m.main, { main: m.main, wms: 0, codes: new Set(), hows: new Set(), wmsName: m.name });
-      const r = reconMap.get(m.main);
-      r.wms += m.qty; r.codes.add(m.code); r.hows.add(m.how);
-    });
-    let recon = [...reconMap.values()].map(r => {
-      const g = whg.get(r.main);
-      return { main: r.main, wms: r.wms, gunpo: g.gunpo, name: g.name || r.wmsName,
-               cust: g.custName, damdang: g.damdang,
-               codes: [...r.codes].sort().join(','), how: [...r.hows].sort().join('+') };
-    });
-    whg.forEach((g, m) => {
-      if (!reconMap.has(m) && g.gunpo !== 0)
-        recon.push({ main: m, wms: 0, gunpo: g.gunpo, name: g.name, cust: g.custName,
-                     damdang: g.damdang, codes: '', how: '군포전산만 존재(WMS 재고없음)' });
-    });
-    recon.sort((a, b) => a.damdang.localeCompare(b.damdang, 'ko') ||
-                         a.cust.localeCompare(b.cust, 'ko') || a.main.localeCompare(b.main));
-    const zeroBoth = recon.filter(r => r.wms === 0 && r.gunpo === 0);
-    recon = recon.filter(r => r.wms !== 0 || r.gunpo !== 0);
-
-    const code2main = new Map(matched.map(m => [m.code, m.main]));
-    const auditMap = new Map();
-    wmsRaw.forEach(r => {
-      const main = code2main.get(r.code);
-      const g = main ? whg.get(main) : null;
-      const dd = g ? g.damdang : '미확인(매칭실패)';
-      const cust = g ? g.custName : (custMap.get(r.code.split('-')[2]) || r.code.split('-')[2] || '');
-      const key = [dd, cust, r.code, r.name, r.size].join('|');
-      if (!auditMap.has(key)) auditMap.set(key, { damdang: dd, cust, code: r.code, name: r.name, size: r.size, qty: 0 });
-      auditMap.get(key).qty += r.qty;
-    });
-    const audit = [...auditMap.values()].sort((a, b) =>
-      a.damdang.localeCompare(b.damdang, 'ko') || a.cust.localeCompare(b.cust, 'ko') ||
-      a.code.localeCompare(b.code) || a.size.localeCompare(b.size, 'ko', { numeric: true }));
-
-    const wmsTotal = wmsRaw.reduce((s, r) => s + r.qty, 0);
-    const gunpoTotal = [...whg.values()].reduce((s, g) => s + g.gunpo, 0);
-    const chk1 = recon.reduce((s, r) => s + r.wms, 0) + zeroBoth.reduce((s, r) => s + r.wms, 0) + dropout.reduce((s, d) => s + d.qty, 0);
-    const chk2 = recon.reduce((s, r) => s + r.gunpo, 0) + zeroBoth.reduce((s, r) => s + r.gunpo, 0);
-    const chk3 = audit.reduce((s, a) => s + a.qty, 0);
-    const valid = (Math.round(wmsTotal) === Math.round(chk1)) &&
-                  (Math.round(gunpoTotal) === Math.round(chk2)) &&
-                  (Math.round(wmsTotal) === Math.round(chk3));
-    return { recon, zeroBoth, dropout, audit, wmsTotal, gunpoTotal, valid,
-             diffCount: recon.filter(r => r.wms !== r.gunpo).length };
-  }
-  return { run };
-})();
-
-/* ───────── UI ───────── */
+/* ═════════ 상태 & 보정 저장 ═════════ */
 const $ = id => document.getElementById(id);
 const fmt = n => Math.round(n).toLocaleString('ko-KR');
-const t = new Date();
-$('today').textContent = `${t.getFullYear()}. ${t.getMonth()+1}. ${t.getDate()}.`;
+const now = () => { const d=new Date(); return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; };
+const LS_KEY = 'jaego_daesa_bojeong_v1';
 
-let fileW = null, fileH = null, R = null;
+let corrections = { maps:{}, damdang:{}, log:[] };  // maps: {wmsCode: erpMain|'EXCLUDE'}, damdang: {main: 이름}
+let userName = '';
+let W2D = null, H2D = null, R = null;
+let storageOK = true;
 
-function setStep(n){
-  [1,2,3].forEach(i=>{
-    const el = $('st'+i);
-    el.classList.toggle('done', i < n);
-    el.classList.toggle('on', i === n);
-  });
-}
-
-async function sniff(file){
-  // 파일명 우선, 애매하면 내용으로 판별
-  const nm = file.name;
-  if (nm.includes('창고별')) return 'H';
-  if (nm.toUpperCase().includes('WMS')) return 'W';
-  const wb = XLSX.read(await file.arrayBuffer(), { type:'array' });
-  const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header:1, defval:null });
-  const h0 = (rows[0]||[]).map(x=>String(x??''));
-  if (h0.some(x=>x.startsWith('군포_'))) return 'H';
-  return 'W';
-}
-
-async function acceptFiles(list){
-  $('msg').textContent = '';
-  for (const f of list){
-    if (!/\.(xls|xlsx)$/i.test(f.name)) { $('msg').textContent = `엑셀 파일이 아닙니다: ${f.name}`; continue; }
-    const kind = await sniff(f);
-    if (kind === 'W') { fileW = f; $('slotW').classList.add('ok'); $('slotW').querySelector('.fname').textContent = f.name; }
-    else { fileH = f; $('slotH').classList.add('ok'); $('slotH').querySelector('.fname').textContent = f.name; }
-  }
-  $('runBtn').disabled = !(fileW && fileH);
-  if (fileW && fileH) setStep(2);
-}
-
-const drop = $('drop');
-drop.addEventListener('click', ()=> $('fileInput').click());
-drop.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault(); $('fileInput').click();} });
-$('fileInput').addEventListener('change', e=> acceptFiles([...e.target.files]));
-['dragover','dragenter'].forEach(ev=> drop.addEventListener(ev, e=>{e.preventDefault(); drop.classList.add('over');}));
-['dragleave','drop'].forEach(ev=> drop.addEventListener(ev, e=>{e.preventDefault(); drop.classList.remove('over');}));
-drop.addEventListener('drop', e=> acceptFiles([...e.dataTransfer.files]));
-$('resetBtn').addEventListener('click', ()=> location.reload());
-
-$('runBtn').addEventListener('click', async ()=>{
+function loadCorrections(){
   try{
-    $('runBtn').disabled = true; $('runBtn').textContent = '대사 중…';
-    const [bw, bh] = await Promise.all([fileW.arrayBuffer(), fileH.arrayBuffer()]);
-    const w2d = XLSX.utils.sheet_to_json(XLSX.read(bw,{type:'array'}).Sheets[XLSX.read(bw,{type:'array'}).SheetNames[0]], {header:1, defval:null});
-    const whb = XLSX.read(bh,{type:'array'});
-    const h2d = XLSX.utils.sheet_to_json(whb.Sheets[whb.SheetNames[0]], {header:1, defval:null});
-    R = RECON.run(w2d, h2d);
-    render(R);
-    setStep(3);
-  }catch(err){
-    $('msg').textContent = '오류: ' + err.message;
-  }finally{
-    $('runBtn').disabled = false; $('runBtn').textContent = '대사 실행';
+    const raw = localStorage.getItem(LS_KEY);
+    if(raw){ const o = JSON.parse(raw); corrections = o.corrections || corrections; userName = o.userName || ''; }
+    $('userName').value = userName;
+    const n = Object.keys(corrections.maps).length + Object.keys(corrections.damdang).length;
+    if(n) $('saveNote').textContent = `이 PC에 저장된 보정 ${n}건이 있어 자동 적용됩니다.`;
+  }catch(e){ storageOK = false; }
+}
+function saveCorrections(){
+  userName = $('userName').value.trim();
+  try{ localStorage.setItem(LS_KEY, JSON.stringify({corrections, userName})); }
+  catch(e){ storageOK = false; }
+}
+function addLog(action, detail, undo){
+  corrections.log.unshift({ts: now(), user: userName || '(이름없음)', action, detail, undo});
+}
+loadCorrections();
+$('userName').addEventListener('change', saveCorrections);
+
+/* ═════════ 대사 핵심 로직 (파이썬 이식본 + 보정 적용) ═════════ */
+const clean = c => String(c ?? '').replace(/\s+/g, '').trim().toUpperCase();
+const stripVariant = code => { const p = code.split('-');
+  return (p.length >= 6 && /^\d+$/.test(p[p.length-1])) ? p.slice(0,-1).join('-') : code; };
+const seasonKey = code => { const p = code.split('-');
+  const m = p[p.length-1].match(/^([A-Z]+)(\d+|NO)$/);
+  return m ? p.slice(0,-1).join('-') + '-' + m[1] + '*' : code; };
+const yearOf = code => { const m = code.split('-').pop().match(/(\d{2})$/); return m ? parseInt(m[1],10) : -1; };
+const normName = s => String(s ?? '').replace(/[\s()\[\]_/·,-]+/g,'').toUpperCase();
+const bigrams = s => { const r=[]; for(let i=0;i<s.length-1;i++) r.push(s.slice(i,i+2)); return r; };
+const simScore = (a,b) => { if(!a||!b) return 0; if(a===b) return 1;
+  const A=bigrams(a), B=new Map(); bigrams(b).forEach(g=>B.set(g,(B.get(g)||0)+1));
+  let hit=0; A.forEach(g=>{ if(B.get(g)>0){hit++; B.set(g,B.get(g)-1);} });
+  return (2*hit)/(a.length-1+b.length-1); };
+const num = v => { const n=parseFloat(v); return isNaN(n)?0:n; };
+
+function parseWMS(rows){
+  const hdr = (rows[1]||[]).map(h=>String(h??'').trim());
+  const iC=hdr.indexOf('품번'), iN=hdr.indexOf('품명'), iS=hdr.indexOf('사이즈'), iQ=hdr.indexOf('재고수량');
+  if(iC<0||iQ<0) throw new Error('WMS 파일에서 [품번/재고수량] 열을 찾지 못했습니다.');
+  const out=[];
+  for(let r=2;r<rows.length;r++){ const row=rows[r]; if(!row) continue;
+    const code=clean(row[iC]); if(!code) continue;
+    out.push({code, name:String(row[iN]??''), size:String(row[iS]??''), qty:num(row[iQ])}); }
+  return out;
+}
+function parseWH(rows){
+  const hdr=(rows[0]||[]).map(h=>String(h??'').trim());
+  const iC=hdr.indexOf('품목'), iN=hdr.indexOf('품목명'), iK=hdr.indexOf('주거래처코드'), iKN=hdr.indexOf('주거래처명');
+  const gunpo=hdr.map((h,i)=>h.startsWith('군포_')?i:-1).filter(i=>i>=0);
+  if(iC<0||!gunpo.length) throw new Error('창고별 파일에서 [품목/군포_담당자] 열을 찾지 못했습니다.');
+  const out=[];
+  for(let r=1;r<rows.length;r++){ const row=rows[r]; if(!row) continue;
+    const code=clean(row[iC]); if(!code) continue;
+    out.push({code, name:String(row[iN]??''), custCd:clean(row[iK]), custName:String(row[iKN]??''),
+              per:gunpo.map(i=>num(row[i]))}); }
+  return {rows:out, damdangNames:gunpo.map(i=>hdr[i].replace('군포_',''))};
+}
+
+function compute(){
+  const wmsRaw = parseWMS(W2D);
+  const {rows:whRaw, damdangNames} = parseWH(H2D);
+
+  const whg=new Map(), custMap=new Map();
+  whRaw.forEach(r=>{
+    const main=r.code.split('-').slice(0,-1).join('-');
+    if(!whg.has(main)) whg.set(main,{name:r.name,custCd:r.custCd,custName:r.custName,
+                                     per:new Array(damdangNames.length).fill(0),gunpo:0});
+    const g=whg.get(main);
+    r.per.forEach((v,i)=>{g.per[i]+=v; g.gunpo+=v;});
+    if(r.custCd && !custMap.has(r.custCd)) custMap.set(r.custCd, r.custName);
+  });
+  whg.forEach((g,m)=>{
+    const names=damdangNames.filter((_,i)=>g.per[i]!==0);
+    g.autoDamdang = names.length ? names.join('/') : '담당미지정';
+    g.damdang = corrections.damdang[m] || g.autoDamdang;   // 보정: 담당지정
+  });
+
+  const wg=new Map();
+  wmsRaw.forEach(r=>{
+    if(!wg.has(r.code)) wg.set(r.code,{code:r.code,name:r.name,qty:0,custCd:r.code.split('-')[2]||''});
+    wg.get(r.code).qty+=r.qty;
+  });
+
+  const skeyGroups=new Map();
+  whg.forEach((_,m)=>{ const k=seasonKey(m);
+    if(!skeyGroups.has(k)) skeyGroups.set(k,[]); skeyGroups.get(k).push(m); });
+
+  const matched=[], dropout=[], excluded=[];
+  wg.forEach(item=>{
+    const manual = corrections.maps[item.code];           // 보정: 코드매핑 (최우선 티어)
+    if(manual==='EXCLUDE'){ item.custName=custMap.get(item.custCd)||item.custCd; excluded.push(item); return; }
+    if(manual && whg.has(manual)){ matched.push({...item, main:manual, how:'수동매핑'}); return; }
+    const nv=stripVariant(item.code);
+    let main=null, how='미매칭';
+    if(whg.has(item.code)){ main=item.code; how='완전일치'; }
+    else if(nv!==item.code && whg.has(nv)){ main=nv; how='분화코드통합(-N 제거)'; }
+    else{
+      const cands=skeyGroups.get(seasonKey(nv))||[];
+      if(cands.length===1){ main=cands[0]; how='연식차이매칭'; }
+      else if(cands.length>1){
+        const wy=yearOf(nv);
+        main=[...cands].sort().reduce((b,c)=>
+          (Math.abs(yearOf(c)-wy)<Math.abs(yearOf(b)-wy) ||
+           (Math.abs(yearOf(c)-wy)===Math.abs(yearOf(b)-wy) && yearOf(c)>yearOf(b)))?c:b);
+        how=`연식차이매칭(후보${cands.length}건 중 최근접 선택)`;
+      }
+    }
+    if(main) matched.push({...item, main, how});
+    else dropout.push(item);
+  });
+
+  const whArr=[...whg.entries()].map(([m,g])=>({main:m, name:g.name, custCd:g.custCd, nm:normName(g.name)}));
+  dropout.forEach(d=>{
+    const tgt=normName(d.name);
+    d.cands = whArr.filter(w=>w.custCd===d.custCd)
+      .map(w=>({m:w.main, name:w.name, s:simScore(tgt,w.nm)}))
+      .sort((a,b)=>b.s-a.s).slice(0,3).filter(x=>x.s>=0.40);
+    d.custName = custMap.get(d.custCd)||d.custCd;
+  });
+
+  const reconMap=new Map();
+  matched.forEach(m=>{
+    if(!reconMap.has(m.main)) reconMap.set(m.main,{main:m.main,wms:0,codes:new Set(),hows:new Set(),wmsName:m.name});
+    const r=reconMap.get(m.main);
+    r.wms+=m.qty; r.codes.add(m.code); r.hows.add(m.how);
+  });
+  let recon=[...reconMap.values()].map(r=>{
+    const g=whg.get(r.main);
+    return {main:r.main, wms:r.wms, gunpo:g.gunpo, name:g.name||r.wmsName, cust:g.custName,
+            damdang:g.damdang, codes:[...r.codes].sort().join(','), how:[...r.hows].sort().join('+')};
+  });
+  whg.forEach((g,m)=>{
+    if(!reconMap.has(m) && g.gunpo!==0)
+      recon.push({main:m, wms:0, gunpo:g.gunpo, name:g.name, cust:g.custName,
+                  damdang:g.damdang, codes:'', how:'군포전산만 존재(WMS 재고없음)'});
+  });
+  recon.sort((a,b)=>a.damdang.localeCompare(b.damdang,'ko')||a.cust.localeCompare(b.cust,'ko')||a.main.localeCompare(b.main));
+  const zeroBoth=recon.filter(r=>r.wms===0&&r.gunpo===0);
+  recon=recon.filter(r=>r.wms!==0||r.gunpo!==0);
+
+  const code2main=new Map(matched.map(m=>[m.code,m.main]));
+  const auditMap=new Map();
+  wmsRaw.forEach(r=>{
+    const main=code2main.get(r.code);
+    const g=main?whg.get(main):null;
+    const dd=g?g.damdang:(corrections.maps[r.code]==='EXCLUDE'?'수동제외':'미확인(매칭실패)');
+    const cust=g?g.custName:(custMap.get(r.code.split('-')[2])||r.code.split('-')[2]||'');
+    const key=[dd,cust,r.code,r.name,r.size].join('|');
+    if(!auditMap.has(key)) auditMap.set(key,{damdang:dd,cust,code:r.code,name:r.name,size:r.size,qty:0});
+    auditMap.get(key).qty+=r.qty;
+  });
+  const audit=[...auditMap.values()].sort((a,b)=>
+    a.damdang.localeCompare(b.damdang,'ko')||a.cust.localeCompare(b.cust,'ko')||
+    a.code.localeCompare(b.code)||a.size.localeCompare(b.size,'ko',{numeric:true}));
+
+  const wmsTotal=wmsRaw.reduce((s,r)=>s+r.qty,0);
+  const gunpoTotal=[...whg.values()].reduce((s,g)=>s+g.gunpo,0);
+  const chk1=recon.reduce((s,r)=>s+r.wms,0)+zeroBoth.reduce((s,r)=>s+r.wms,0)
+            +dropout.reduce((s,d)=>s+d.qty,0)+excluded.reduce((s,d)=>s+d.qty,0);
+  const chk2=recon.reduce((s,r)=>s+r.gunpo,0)+zeroBoth.reduce((s,r)=>s+r.gunpo,0);
+  const chk3=audit.reduce((s,a)=>s+a.qty,0);
+  const valid=(Math.round(wmsTotal)===Math.round(chk1))&&(Math.round(gunpoTotal)===Math.round(chk2))
+              &&(Math.round(wmsTotal)===Math.round(chk3));
+  R={recon, zeroBoth, dropout, excluded, audit, wmsTotal, gunpoTotal, valid,
+     diffCount:recon.filter(r=>r.wms!==r.gunpo).length, whg, damdangNames};
+}
+
+/* ═════════ 파일 화면 ═════════ */
+let fileW=null, fileH=null;
+async function sniff(file){
+  const nm=file.name;
+  if(nm.includes('창고별')) return 'H';
+  if(nm.toUpperCase().includes('WMS')) return 'W';
+  const wb=XLSX.read(await file.arrayBuffer(),{type:'array'});
+  const rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:null});
+  return ((rows[0]||[]).some(x=>String(x??'').startsWith('군포_'))) ? 'H' : 'W';
+}
+async function acceptFiles(list){
+  $('msg').textContent='';
+  for(const f of list){
+    if(/\.json$/i.test(f.name)){ importJson(await f.text()); continue; }
+    if(!/\.(xls|xlsx)$/i.test(f.name)){ $('msg').textContent=`지원하지 않는 파일: ${f.name}`; continue; }
+    const kind=await sniff(f);
+    if(kind==='W'){ fileW=f; $('slotW').classList.add('ok'); $('slotW').querySelector('.fname').textContent=f.name; }
+    else{ fileH=f; $('slotH').classList.add('ok'); $('slotH').querySelector('.fname').textContent=f.name; }
   }
+  $('runBtn').disabled=!(fileW&&fileH);
+}
+const drop=$('drop');
+drop.addEventListener('click',()=>$('fileInput').click());
+drop.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('fileInput').click();}});
+$('fileInput').addEventListener('change',e=>acceptFiles([...e.target.files]));
+['dragover','dragenter'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over');}));
+['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over');}));
+drop.addEventListener('drop',e=>acceptFiles([...e.dataTransfer.files]));
+$('resetBtn').addEventListener('click',()=>location.reload());
+
+$('runBtn').addEventListener('click',async()=>{
+  try{
+    $('runBtn').disabled=true; $('runBtn').textContent='대사 중…';
+    const [bw,bh]=await Promise.all([fileW.arrayBuffer(),fileH.arrayBuffer()]);
+    const wb1=XLSX.read(bw,{type:'array'}), wb2=XLSX.read(bh,{type:'array'});
+    W2D=XLSX.utils.sheet_to_json(wb1.Sheets[wb1.SheetNames[0]],{header:1,defval:null});
+    H2D=XLSX.utils.sheet_to_json(wb2.Sheets[wb2.SheetNames[0]],{header:1,defval:null});
+    refresh();
+    $('fileScreen').style.display='none'; $('tabs').style.display='block';
+  }catch(err){ $('msg').textContent='오류: '+err.message; }
+  finally{ $('runBtn').disabled=false; $('runBtn').textContent='대사 실행'; }
 });
 
-function render(r){
-  $('result').style.display = 'block';
-  const stamp = $('stamp');
-  stamp.classList.toggle('bad', !r.valid);
-  stamp.querySelector('.seal').innerHTML = r.valid ? '검증<br>OK' : '검증<br>실패';
-  $('stampTitle').textContent = r.valid
-    ? '총량 검증 통과 — 이중계상·누락 없음'
-    : '총량 검증 실패 — 결과를 사용하지 마시고 파일을 확인해주세요';
-  $('stampDetail').textContent = `WMS ${fmt(r.wmsTotal)} · ERP(군포) ${fmt(r.gunpoTotal)} · 대사행 ${fmt(r.recon.length)}`;
+/* ═════════ 탭 ═════════ */
+document.querySelectorAll('.tabbar button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.tabbar button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('on',p.id===b.dataset.tab));
+}));
 
-  $('cards').innerHTML = [
-    ['WMS 실물 수량', fmt(r.wmsTotal), ''],
-    ['ERP(군포) 수량', fmt(r.gunpoTotal), ''],
-    ['차이 발생 품목', fmt(r.diffCount) + '건', 'warn'],
-    ['매칭 실패', fmt(r.dropout.length) + '건', r.dropout.length ? 'bad' : '']
-  ].map(([lb,v,c])=>`<div class="kcard ${c}"><div class="lb">${lb}</div><div class="v">${v}</div></div>`).join('');
+/* ═════════ 렌더링 ═════════ */
+let sortKey='damdang', sortAsc=true;
+function refresh(){ compute(); renderStamp(); renderFilters(); renderMain(); renderFix(); renderLog(); saveCorrections(); }
 
-  // 담당자별
-  const dd = new Map();
-  r.recon.forEach(x=>{
-    if(!dd.has(x.damdang)) dd.set(x.damdang, {w:0,g:0,c:0});
-    const o = dd.get(x.damdang); o.w+=x.wms; o.g+=x.gunpo; if(x.wms!==x.gunpo)o.c++;
-  });
-  let tw=0,tg=0,tc=0;
-  let html = '<tr><th>담당자</th><th style="text-align:right">WMS 수량</th><th style="text-align:right">ERP 수량</th><th style="text-align:right">차이</th><th style="text-align:right">차이건수</th></tr>';
-  [...dd.entries()].sort((a,b)=>a[0].localeCompare(b[0],'ko')).forEach(([k,o])=>{
-    const d=o.w-o.g; tw+=o.w; tg+=o.g; tc+=o.c;
-    html += `<tr><td>${k}</td><td class="n">${fmt(o.w)}</td><td class="n">${fmt(o.g)}</td><td class="n ${d<0?'neg':d>0?'pos':''}">${fmt(d)}</td><td class="n">${fmt(o.c)}</td></tr>`;
-  });
-  html += `<tr class="total"><td>합계</td><td class="n">${fmt(tw)}</td><td class="n">${fmt(tg)}</td><td class="n">${fmt(tw-tg)}</td><td class="n">${fmt(tc)}</td></tr>`;
-  $('tblDamdang').innerHTML = html;
-
-  // 매칭 방식
-  const hows = new Map();
-  r.recon.forEach(x=> hows.set(x.how, (hows.get(x.how)||0)+1));
-  $('tblHow').innerHTML = '<tr><th>매칭 방식</th><th style="text-align:right">품목 수</th></tr>' +
-    [...hows.entries()].sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<tr><td>${k}</td><td class="n">${fmt(v)}</td></tr>`).join('');
-
-  // 매칭실패 미리보기 (상위 10)
-  $('tblDrop').innerHTML = '<tr><th>고객사</th><th>WMS 코드</th><th>품명</th><th style="text-align:right">수량</th><th>유사도 추천</th></tr>' +
-    (r.dropout.length ? r.dropout.slice(0,10).map(d=>
-      `<tr><td>${d.custName}</td><td style="font-family:var(--mono)">${d.code}</td><td>${d.name}</td><td class="n">${fmt(d.qty)}</td><td style="font-family:var(--mono); font-size:12px">${d.suggest||'-'}</td></tr>`).join('')
-    : '<tr><td colspan="5">매칭 실패 품목이 없습니다.</td></tr>');
+function renderStamp(){
+  const s=$('stamp');
+  s.classList.toggle('bad',!R.valid);
+  s.querySelector('.seal').innerHTML=R.valid?'검증<br>OK':'검증<br>실패';
+  $('stampTitle').textContent=R.valid?'총량 검증 통과 — 이중계상·누락 없음':'총량 검증 실패 — 파일을 확인해주세요';
+  $('stampDetail').textContent=`WMS ${fmt(R.wmsTotal)} · ERP(군포) ${fmt(R.gunpoTotal)} · 대사행 ${fmt(R.recon.length)} · 보정 ${Object.keys(corrections.maps).length+Object.keys(corrections.damdang).length}건`;
+  $('fixBadge').textContent=R.dropout.length + R.recon.filter(r=>r.damdang==='담당미지정').length;
 }
 
-/* ───────── 엑셀 출력 (6개 시트, 차이 컬럼 수식) ───────── */
-$('dlBtn') && $('dlBtn').addEventListener('click', ()=>{
-  if(!R) return;
-  const wb = XLSX.utils.book_new();
-  const setCols = (ws, w)=> ws['!cols'] = w.map(x=>({wch:x}));
-  const setF = (ws, addr, f)=> ws[addr] = { t:'n', f };
-
-  // 1. 대사결과
-  const a1 = [['담당자','고객사명','품목코드','품목명','WMS 수량','ERP 수량','차이 수량 (WMS-ERP)','비고(매칭 성공 여부)','WMS 원코드']];
-  R.recon.forEach(r=> a1.push([r.damdang, r.cust, r.main, r.name, r.wms, r.gunpo, 0, r.how, r.codes]));
-  const ws1 = XLSX.utils.aoa_to_sheet(a1);
-  R.recon.forEach((_,i)=> setF(ws1, 'G'+(i+2), `E${i+2}-F${i+2}`));
-  setCols(ws1, [12,16,24,40,12,12,18,26,30]);
-  ws1['!autofilter'] = { ref:'A1:I'+(R.recon.length+1) };
-  XLSX.utils.book_append_sheet(wb, ws1, '대사결과');
-
-  // 2. 재고조사리스트
-  const a2 = [['담당자','고객사명','WMS 품목코드','품명','사이즈','전산수량(WMS)','실사수량(기입)','차이(실사-전산)','확인자 서명/비고']];
-  R.audit.forEach(r=> a2.push([r.damdang, r.cust, r.code, r.name, r.size, r.qty, null, null, null]));
-  const ws2 = XLSX.utils.aoa_to_sheet(a2);
-  R.audit.forEach((_,i)=> ws2['H'+(i+2)] = { t:'s', f:`IF(G${i+2}="","",G${i+2}-F${i+2})` });
-  setCols(ws2, [12,16,24,36,10,13,13,14,18]);
-  ws2['!autofilter'] = { ref:'A1:I'+(R.audit.length+1) };
-  XLSX.utils.book_append_sheet(wb, ws2, '재고조사리스트');
-
-  // 3. 매칭실패_WMS
-  const a3 = [['고객사명','WMS 품목코드','품명','WMS 합산 수량','유사도 기반 후보(유사도)']];
-  R.dropout.forEach(d=> a3.push([d.custName, d.code, d.name, d.qty, d.suggest||'']));
-  const ws3 = XLSX.utils.aoa_to_sheet(a3);
-  setCols(ws3, [16,26,36,14,48]);
-  XLSX.utils.book_append_sheet(wb, ws3, '매칭실패_WMS');
-
-  // 4. 양측재고없음(제외)
-  const a4 = [['담당자','고객사명','품목코드','품목명','WMS 수량','ERP 수량','비고']];
-  R.zeroBoth.forEach(r=> a4.push([r.damdang, r.cust, r.main, r.name, 0, 0, r.how]));
-  const ws4 = XLSX.utils.aoa_to_sheet(a4);
-  setCols(ws4, [12,16,24,40,12,12,26]);
-  XLSX.utils.book_append_sheet(wb, ws4, '양측재고없음(제외)');
-
-  // 5. 담당자별요약 / 6. 고객사별요약 (SUMIF 수식)
-  const n = R.recon.length + 1;
-  const mkSummary = (keyColLetter, keys, sheetName)=>{
-    const a = [[sheetName === '담당자별요약' ? '담당자' : '고객사명','WMS 수량','ERP 수량','차이 수량','차이건수']];
-    keys.forEach(k=> a.push([k, 0, 0, 0, 0]));
-    a.push(['합계', 0, 0, 0, 0]);
-    const ws = XLSX.utils.aoa_to_sheet(a);
-    keys.forEach((_,i)=>{
-      const r = i + 2;
-      setF(ws, 'B'+r, `SUMIF(대사결과!$${keyColLetter}$2:$${keyColLetter}$${n},A${r},대사결과!$E$2:$E$${n})`);
-      setF(ws, 'C'+r, `SUMIF(대사결과!$${keyColLetter}$2:$${keyColLetter}$${n},A${r},대사결과!$F$2:$F$${n})`);
-      setF(ws, 'D'+r, `B${r}-C${r}`);
-      setF(ws, 'E'+r, `SUMPRODUCT((대사결과!$${keyColLetter}$2:$${keyColLetter}$${n}=A${r})*(대사결과!$G$2:$G$${n}<>0))`);
-    });
-    const tr = keys.length + 2;
-    ['B','C','D','E'].forEach(c=> setF(ws, c+tr, `SUM(${c}2:${c}${tr-1})`));
-    setCols(ws, [16,14,14,14,12]);
-    XLSX.utils.book_append_sheet(wb, ws, sheetName);
+function renderFilters(){
+  const keep=(sel,vals)=>{
+    const cur=sel.value;
+    sel.innerHTML='<option value="">전체</option>'+vals.map(v=>`<option>${v}</option>`).join('');
+    if([...sel.options].some(o=>o.value===cur)) sel.value=cur;
   };
-  mkSummary('A', [...new Set(R.recon.map(r=>r.damdang))].sort((a,b)=>a.localeCompare(b,'ko')), '담당자별요약');
-  mkSummary('B', [...new Set(R.recon.map(r=>r.cust))].sort((a,b)=>a.localeCompare(b,'ko')), '고객사별요약');
+  keep($('fDamdang'),[...new Set(R.recon.map(r=>r.damdang))].sort((a,b)=>a.localeCompare(b,'ko')));
+  keep($('fCust'),[...new Set(R.recon.map(r=>r.cust))].sort((a,b)=>a.localeCompare(b,'ko')));
+}
+['fDamdang','fCust','fText','fDiff'].forEach(id=>$(id).addEventListener('input',renderMain));
 
-  const d = new Date();
-  XLSX.writeFile(wb, `재고대사_결과_${d.getFullYear()%100}년${d.getMonth()+1}월${d.getDate()}일.xlsx`);
+function filteredRows(){
+  const d=$('fDamdang').value, c=$('fCust').value,
+        t=$('fText').value.trim().toUpperCase(), diff=$('fDiff').checked;
+  return R.recon.filter(r=>
+    (!d||r.damdang===d)&&(!c||r.cust===c)&&(!diff||r.wms!==r.gunpo)&&
+    (!t||r.main.includes(t)||String(r.name).toUpperCase().includes(t)||r.codes.includes(t)));
+}
+function renderMain(){
+  const rows=filteredRows().slice().sort((a,b)=>{
+    let va=a[sortKey], vb=b[sortKey];
+    if(sortKey==='diff'){va=a.wms-a.gunpo; vb=b.wms-b.gunpo;}
+    const r=(typeof va==='number')?va-vb:String(va).localeCompare(String(vb),'ko');
+    return sortAsc?r:-r;
+  });
+  const w=rows.reduce((s,r)=>s+r.wms,0), g=rows.reduce((s,r)=>s+r.gunpo,0),
+        dc=rows.filter(r=>r.wms!==r.gunpo).length;
+  $('fsum').innerHTML=`표시 ${fmt(rows.length)}행 · WMS ${fmt(w)} · ERP ${fmt(g)} · 차이 ${fmt(w-g)} (${fmt(dc)}건)`;
+  $('cards').innerHTML=[
+    ['WMS 수량(필터 기준)',fmt(w),''],['ERP 수량(필터 기준)',fmt(g),''],
+    ['차이 발생',fmt(dc)+'건','warn'],['매칭 실패(전체)',fmt(R.dropout.length)+'건',R.dropout.length?'bad':'']
+  ].map(([lb,v,c])=>`<div class="kcard ${c}"><div class="lb">${lb}</div><div class="v">${v}</div></div>`).join('');
+
+  const cols=[['damdang','담당자'],['cust','고객사'],['main','품목코드'],['name','품목명'],
+              ['wms','WMS'],['gunpo','ERP'],['diff','차이'],['how','비고']];
+  let html='<tr>'+cols.map(([k,lb])=>
+    `<th data-k="${k}">${lb} <span class="arr">${sortKey===k?(sortAsc?'▲':'▼'):''}</span></th>`).join('')+'</tr>';
+  rows.forEach(r=>{
+    const d=r.wms-r.gunpo;
+    html+=`<tr class="${r.how.includes('수동')?'manual':''}"><td>${r.damdang}</td><td>${r.cust}</td>
+      <td class="code">${r.main}</td><td>${r.name}</td>
+      <td class="n">${fmt(r.wms)}</td><td class="n">${fmt(r.gunpo)}</td>
+      <td class="n ${d<0?'neg':d>0?'pos':''}">${fmt(d)}</td>
+      <td style="font-size:12px">${r.how}</td></tr>`;
+  });
+  $('tblMain').innerHTML=html;
+  $('tblMain').querySelectorAll('th').forEach(th=>th.addEventListener('click',()=>{
+    const k=th.dataset.k;
+    if(sortKey===k) sortAsc=!sortAsc; else{sortKey=k; sortAsc=true;}
+    renderMain();
+  }));
+}
+
+/* ── 탭2: 보정 ── */
+function renderFix(){
+  // 매칭실패 + 수동제외 카드
+  let html='';
+  if(!R.dropout.length && !R.excluded.length) html='<p class="note done-lb">✔ 매칭실패 품목이 없습니다.</p>';
+  R.dropout.forEach(d=>{
+    const cands=d.cands.map(c=>
+      `<button class="btn-sm btn-cand" data-act="map" data-code="${d.code}" data-main="${c.m}"
+        title="${c.name}">${c.m} (${Math.round(c.s*100)}%)</button>`).join('');
+    html+=`<div class="fixcard"><div class="head">
+      <div class="ttl">${d.custName} · ${d.name} <span>${d.code} · ${fmt(d.qty)}개</span></div>
+      <button class="btn-sm btn-x" data-act="exclude" data-code="${d.code}">대사제외</button></div>
+      <div class="cands">${cands||'<span class="note">추천 후보 없음 — 아래에서 검색하세요</span>'}</div>
+      <div class="searchrow"><input type="text" placeholder="ERP 코드/품명 직접 검색" data-srch="${d.code}"></div>
+      <div class="srch-res" id="sr_${cssId(d.code)}"></div></div>`;
+  });
+  R.excluded.forEach(d=>{
+    html+=`<div class="fixcard"><div class="head">
+      <div class="ttl">${d.custName} · ${d.name} <span>${d.code} · ${fmt(d.qty)}개</span></div>
+      <span class="done-lb">대사제외됨 <button class="btn-sm btn-ghost" data-act="undo-map" data-code="${d.code}">되돌리기</button></span>
+      </div></div>`;
+  });
+  $('fixDrop').innerHTML=html;
+
+  // 담당 지정
+  const q=$('ddSearch').value.trim().toUpperCase();
+  const targets=R.recon.filter(r=> q
+    ? (r.main.includes(q)||String(r.name).toUpperCase().includes(q))
+    : r.damdang==='담당미지정').slice(0,30);
+  const ddOpts=R.damdangNames.map(n=>`<option>${n}</option>`).join('');
+  $('fixDamdang').innerHTML= targets.length ? targets.map(r=>{
+    const isManual=corrections.damdang[r.main];
+    return `<div class="fixcard"><div class="head">
+      <div class="ttl">${r.cust} · ${r.name} <span>${r.main} · WMS ${fmt(r.wms)} / ERP ${fmt(r.gunpo)}</span></div>
+      <div style="display:flex; gap:6px; align-items:center">
+        <select class="dd" data-main="${r.main}">
+          <option value="">${r.damdang}${isManual?' (수동)':''}</option>${ddOpts}</select>
+        ${isManual?`<button class="btn-sm btn-ghost" data-act="undo-dd" data-main="${r.main}">되돌리기</button>`:''}
+      </div></div></div>`;
+  }).join('') : '<p class="note done-lb">✔ 담당미지정 품목이 없습니다. (검색으로 다른 품목의 담당도 변경 가능)</p>';
+
+  // 이벤트 바인딩
+  $('fixDrop').querySelectorAll('button[data-act]').forEach(b=>b.addEventListener('click',()=>doFix(b.dataset)));
+  $('fixDrop').querySelectorAll('input[data-srch]').forEach(inp=>inp.addEventListener('input',()=>erpSearch(inp)));
+  $('fixDamdang').querySelectorAll('select.dd').forEach(s=>s.addEventListener('change',()=>{
+    if(!s.value) return;
+    corrections.damdang[s.dataset.main]=s.value;
+    addLog('담당지정',`${s.dataset.main} → ${s.value}`);
+    refresh();
+  }));
+  $('fixDamdang').querySelectorAll('button[data-act="undo-dd"]').forEach(b=>b.addEventListener('click',()=>{
+    delete corrections.damdang[b.dataset.main];
+    addLog('담당지정 취소',b.dataset.main);
+    refresh();
+  }));
+}
+const cssId = s => s.replace(/[^A-Z0-9]/gi,'_');
+function erpSearch(inp){
+  const q=inp.value.trim().toUpperCase(); const box=$('sr_'+cssId(inp.dataset.srch));
+  if(q.length<2){ box.innerHTML=''; return; }
+  const hits=[...R.whg.entries()]
+    .filter(([m,g])=>m.includes(q)||normName(g.name).includes(normName(q))).slice(0,8);
+  box.innerHTML=hits.map(([m,g])=>
+    `<button class="btn-sm btn-cand" data-act="map" data-code="${inp.dataset.srch}" data-main="${m}"
+      title="${g.name}">${m} · ${g.name.slice(0,18)}</button>`).join('')||'<span class="note">검색 결과 없음</span>';
+  box.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>doFix(b.dataset)));
+}
+function doFix(d){
+  if(d.act==='map'){ corrections.maps[d.code]=d.main; addLog('수동매핑',`${d.code} → ${d.main}`); }
+  if(d.act==='exclude'){ corrections.maps[d.code]='EXCLUDE'; addLog('대사제외',d.code); }
+  if(d.act==='undo-map'){ delete corrections.maps[d.code]; addLog('매핑 취소',d.code); }
+  refresh();
+}
+$('ddSearch').addEventListener('input',renderFix);
+
+/* ── 탭3: 로그 & 내보내기 ── */
+function renderLog(){
+  $('tblLog').innerHTML='<tr><th>시각</th><th>작업자</th><th>작업</th><th>내용</th></tr>'+
+    (corrections.log.length?corrections.log.map(l=>
+      `<tr class="logrow"><td>${l.ts}</td><td>${l.user}</td><td>${l.action}</td><td class="code">${l.detail}</td></tr>`).join('')
+    :'<tr><td colspan="4">보정 내역이 없습니다.</td></tr>');
+}
+$('expBtn').addEventListener('click',()=>{
+  const name=(userName||'이름없음');
+  const blob=new Blob([JSON.stringify({corrections,userName},null,1)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  const d=new Date(); a.download=`보정_${name}_${d.getMonth()+1}월${d.getDate()}일.json`; a.click();
+});
+$('impBtn').addEventListener('click',()=>$('impInput').click());
+$('impInput').addEventListener('change',async e=>{ if(e.target.files[0]) importJson(await e.target.files[0].text()); });
+function importJson(txt){
+  try{
+    const o=JSON.parse(txt); const c=o.corrections||o;
+    Object.assign(corrections.maps, c.maps||{});
+    Object.assign(corrections.damdang, c.damdang||{});
+    corrections.log=[...(c.log||[]),...corrections.log];
+    addLog('보정 가져오기',`매핑 ${Object.keys(c.maps||{}).length}건, 담당 ${Object.keys(c.damdang||{}).length}건 병합`);
+    if(R) refresh(); else saveCorrections();
+    $('saveNote').textContent='보정파일을 병합했습니다.';
+  }catch(e){ $('msg').textContent='보정파일 형식이 올바르지 않습니다.'; }
+}
+$('clrBtn').addEventListener('click',()=>{
+  if(!confirm('이 PC에 저장된 보정을 전부 삭제할까요? 되돌릴 수 없습니다.')) return;
+  corrections={maps:{},damdang:{},log:[]};
+  try{ localStorage.removeItem(LS_KEY); }catch(e){}
+  if(R) refresh();
+});
+
+/* ═════════ 엑셀 출력 ═════════ */
+$('dlBtn').addEventListener('click',()=>{
+  if(!R) return;
+  const wb=XLSX.utils.book_new();
+  const setCols=(ws,w)=>ws['!cols']=w.map(x=>({wch:x}));
+  const setF=(ws,addr,f)=>ws[addr]={t:'n',f};
+
+  const a1=[['담당자','고객사명','품목코드','품목명','WMS 수량','ERP 수량','차이 수량 (WMS-ERP)','비고(매칭 성공 여부)','WMS 원코드']];
+  R.recon.forEach(r=>a1.push([r.damdang,r.cust,r.main,r.name,r.wms,r.gunpo,0,r.how,r.codes]));
+  const ws1=XLSX.utils.aoa_to_sheet(a1);
+  R.recon.forEach((_,i)=>setF(ws1,'G'+(i+2),`E${i+2}-F${i+2}`));
+  setCols(ws1,[12,16,24,40,12,12,18,26,30]);
+  ws1['!autofilter']={ref:'A1:I'+(R.recon.length+1)};
+  XLSX.utils.book_append_sheet(wb,ws1,'대사결과');
+
+  const a2=[['담당자','고객사명','WMS 품목코드','품명','사이즈','전산수량(WMS)','실사수량(기입)','차이(실사-전산)','확인자 서명/비고']];
+  R.audit.forEach(r=>a2.push([r.damdang,r.cust,r.code,r.name,r.size,r.qty,null,null,null]));
+  const ws2=XLSX.utils.aoa_to_sheet(a2);
+  R.audit.forEach((_,i)=>ws2['H'+(i+2)]={t:'s',f:`IF(G${i+2}="","",G${i+2}-F${i+2})`});
+  setCols(ws2,[12,16,24,36,10,13,13,14,18]);
+  ws2['!autofilter']={ref:'A1:I'+(R.audit.length+1)};
+  XLSX.utils.book_append_sheet(wb,ws2,'재고조사리스트');
+
+  const a3=[['고객사명','WMS 품목코드','품명','WMS 합산 수량','유사도 기반 후보 / 처리상태']];
+  R.dropout.forEach(d=>a3.push([d.custName,d.code,d.name,d.qty,d.cands.map(c=>`${c.m}(${Math.round(c.s*100)}%)`).join(' / ')]));
+  R.excluded.forEach(d=>a3.push([d.custName,d.code,d.name,d.qty,'수동 대사제외']));
+  const ws3=XLSX.utils.aoa_to_sheet(a3);
+  setCols(ws3,[16,26,36,14,48]);
+  XLSX.utils.book_append_sheet(wb,ws3,'매칭실패_WMS');
+
+  const a4=[['담당자','고객사명','품목코드','품목명','WMS 수량','ERP 수량','비고']];
+  R.zeroBoth.forEach(r=>a4.push([r.damdang,r.cust,r.main,r.name,0,0,r.how]));
+  const ws4=XLSX.utils.aoa_to_sheet(a4);
+  setCols(ws4,[12,16,24,40,12,12,26]);
+  XLSX.utils.book_append_sheet(wb,ws4,'양측재고없음(제외)');
+
+  const n=R.recon.length+1;
+  const mkSum=(colL,keys,name0,sheet)=>{
+    const a=[[name0,'WMS 수량','ERP 수량','차이 수량','차이건수']];
+    keys.forEach(k=>a.push([k,0,0,0,0])); a.push(['합계',0,0,0,0]);
+    const ws=XLSX.utils.aoa_to_sheet(a);
+    keys.forEach((_,i)=>{const r=i+2;
+      setF(ws,'B'+r,`SUMIF(대사결과!$${colL}$2:$${colL}$${n},A${r},대사결과!$E$2:$E$${n})`);
+      setF(ws,'C'+r,`SUMIF(대사결과!$${colL}$2:$${colL}$${n},A${r},대사결과!$F$2:$F$${n})`);
+      setF(ws,'D'+r,`B${r}-C${r}`);
+      setF(ws,'E'+r,`SUMPRODUCT((대사결과!$${colL}$2:$${colL}$${n}=A${r})*(대사결과!$G$2:$G$${n}<>0))`);});
+    const tr=keys.length+2;
+    ['B','C','D','E'].forEach(c=>setF(ws,c+tr,`SUM(${c}2:${c}${tr-1})`));
+    setCols(ws,[16,14,14,14,12]);
+    XLSX.utils.book_append_sheet(wb,ws,sheet);
+  };
+  mkSum('A',[...new Set(R.recon.map(r=>r.damdang))].sort((a,b)=>a.localeCompare(b,'ko')),'담당자','담당자별요약');
+  mkSum('B',[...new Set(R.recon.map(r=>r.cust))].sort((a,b)=>a.localeCompare(b,'ko')),'고객사명','고객사별요약');
+
+  const a7=[['시각','작업자','작업','내용']];
+  corrections.log.forEach(l=>a7.push([l.ts,l.user,l.action,l.detail]));
+  const ws7=XLSX.utils.aoa_to_sheet(a7);
+  setCols(ws7,[12,12,14,50]);
+  XLSX.utils.book_append_sheet(wb,ws7,'보정내역');
+
+  const d=new Date();
+  XLSX.writeFile(wb,`재고대사_결과_${d.getFullYear()%100}년${d.getMonth()+1}월${d.getDate()}일.xlsx`);
 });
 </script>
 </body>
